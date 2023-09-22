@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <title>Cadastro</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro</h1>
+        <form th:action="@{/cadastroPost}" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="firstName" id="formGroupExampleInput" placeholder="Enter first name" required>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="lastName" id="formGroupExampleInput2" placeholder="Enter last name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br>
+        <h2>Cadastros</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cadastro: ${cadastros}">
+                    <td th:text="${cadastro.email}"></td>
+                    <td th:text="${cadastro.firstName}"></td>
+                    <td th:text="${cadastro.lastName}"></td>
+                    <td>
+                        <a th:href="@{/editar/{id}(id=${cadastro.id})}" class="btn btn-primary">Editar</a>
+                        <a th:href="@{/excluir/{id}(id=${cadastro.id})}" class="btn btn-danger">Excluir</a>
+                    </td>
+                    
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</body>
+</html>
